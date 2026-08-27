@@ -1,6 +1,4 @@
-import os
-
-readme_content = """# SBT Models — Institutional Trade Journal
+# SBT Models — Institutional Trade Journal
 
 An institutional-grade, web-based trading journal designed for technical traders utilizing Smart Money Concepts (SMC), Price Action, Fair Value Gaps (FVG), Order Blocks, and ICT methodologies.
 
@@ -37,5 +35,61 @@ Since this is a client-side static application (`index.html`), you can deploy it
    git add index.html
    git commit -m "Initial commit"
    git branch -M main
-   git remote add origin [https://github.com/YOUR-USERNAME/sbt-trade-journal.git](https://github.com/YOUR-USERNAME/sbt-trade-journal.git)
+   git remote add origin https://github.com/YOUR-USERNAME/sbt-trade-journal.git
    git push -u origin main
+   ```
+3. **Enable GitHub Pages:**
+   * Go to **Settings** -> **Pages**.
+   * Under **Build and deployment**, set **Source** to `Deploy from a branch` and select `main` / `/(root)`.
+   * Click **Save**.
+   * Access your journal live at `https://YOUR-USERNAME.github.io/sbt-trade-journal/`.
+
+---
+
+### Option 2: Local Desktop Usage (No Web Server)
+
+Simply download or copy `index.html` to your local machine and open it directly in any modern web browser (Chrome, Firefox, Edge, Safari):
+
+```bash
+double-click index.html
+# or open via browser terminal
+google-chrome index.html
+```
+
+---
+
+### Option 3: Docker Container (Ubuntu / Self-Hosted Server)
+
+Host the journal on your own Ubuntu server or home lab using Nginx in Docker:
+
+1. **Create project directory:**
+   ```bash
+   mkdir -p ~/trade-journal && cd ~/trade-journal
+   ```
+2. **Copy `index.html`** into this directory.
+3. **Create a `Dockerfile`:**
+   ```dockerfile
+   FROM nginx:alpine
+   COPY index.html /usr/share/nginx/html/index.html
+   EXPOSE 80
+   ```
+4. **Build and run the container:**
+   ```bash
+   docker build -t trade-journal .
+   docker run -d --name trade-journal-app --restart always -p 8080:80 trade-journal
+   ```
+5. Access your web journal at `http://<YOUR_SERVER_IP>:8080`.
+
+---
+
+## 🛠️ Data Management & Security
+
+* **Data Privacy:** Your trading data never leaves your computer or browser. There are no tracking scripts, external database connections, or third-party telemetry.
+* **Exporting Data:** Navigate to **Settings** and click **Export JSON Backup** or **Save File** to save a local copy of your trades embedded into the file itself.
+* **Importing Data:** Transfer your trading history across devices by importing your `.json` backup file in the **Settings** menu.
+
+---
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for details.
